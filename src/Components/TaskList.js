@@ -6,7 +6,9 @@ class TaskList extends Component {
 
     this.state = {
       tasks: [],
-      NewTaskDescription: ""
+      NewTaskDescription: "",
+      newTaskPriority: 1,
+      sendAt: ""
     };
 
     this.tasksRef = this.props.firebase.database().ref('tasks');
@@ -16,7 +18,8 @@ class TaskList extends Component {
     this.tasksRef.on('child_added', snapshot => {
       const task = snapshot.val();
       task.key = snapshot.key;
-      this.setState({ tasks: this.state.tasks.concat( task ) })
+      const tasks = this.state.tasks.concat( task ).sort((a, b) => a.priority > b.priority)
+      this.setState({ tasks: tasks })
     });
 
     this.tasksRef.on('child_removed', snapshot => {
@@ -30,9 +33,12 @@ class TaskList extends Component {
   createTask(e){
     e.preventDefault();
     const newTask = this.state.NewTaskDescription;
+    const newTaskPriority = this.state.newTaskPriority;
     console.log(newTask);
     this.tasksRef.push({
-      name: newTask
+      name: newTask,
+      priority: newTaskPriority,
+      sendAt: this.props.firebase.database.ServerValue.TIMESTAMP
     });
 
   }
@@ -46,6 +52,11 @@ class TaskList extends Component {
   this.setState({ NewTaskDescription: e.target.value });
  }
 
+ getNewTaskPriorityUpdate(e) {
+   console.log('e', e)
+   this.setState({ newTaskPriority: parseInt(e.target.value) })
+ }
+
 
 
   render() {
@@ -53,6 +64,7 @@ class TaskList extends Component {
       <div className="myTaskList"> {this.state.tasks.map((task, index) =>
         <ul key={index}>
           <li>{task.name}</li>
+          <li><input type="checkbox"  /></li>
           <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
         </ul>
       )}
@@ -63,6 +75,13 @@ class TaskList extends Component {
           <input type="text" placeholder="Type Your Task" value={this.state.NewTaskDescription} onChange={ (e) => this.getNewTaskUpdate(e) }/>
           </label>
 
+          <label>Priority
+            <select onChange={ (e) => this.getNewTaskPriorityUpdate(e) }>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
+          </label>
           <input type="submit" value="Create Task" />
 
         </form>

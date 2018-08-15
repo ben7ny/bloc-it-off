@@ -20,6 +20,7 @@ class App extends Component {
     return (
       <div className="App">
           <h1>Bloc-it-off</h1>
+          <h2>Active Tasks</h2>
           <TaskList firebase={firebase} />
       </div>
     );
