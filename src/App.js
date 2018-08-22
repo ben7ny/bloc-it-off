@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
           <nav>
             <h1>Bloc-it-off</h1>
-             <Link to='/'>Active Tasks</Link>
+            <Link to='/'>Active Tasks</Link>
             <Link to='/TaskHistory'>Task History</Link>
           </nav>
           <main>
