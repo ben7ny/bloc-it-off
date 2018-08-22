@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import TaskList from './Components/TaskList';
+import TaskHistory from './Components/TaskHistory';
+
+
 import './App.css';
 
 
@@ -22,6 +26,16 @@ class App extends Component {
           <h1>Bloc-it-off</h1>
           <h2>Active Tasks</h2>
           <TaskList firebase={firebase} />
+
+          <nav>
+            {/* <Link to='/'>Active Tasks</Link> */}
+            <Link to='/TaskHistory'>Task History</Link>
+          </nav>
+          <main>
+            {/* <Route exact path="/" component={TaskList} /> */}
+            <Route path="/TaskHistory" component={TaskHistory} />
+          </main>
+
       </div>
     );
   }
