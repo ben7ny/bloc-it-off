@@ -23,19 +23,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <h1>Bloc-it-off</h1>
-          <h2>Active Tasks</h2>
-          <TaskList firebase={firebase} />
-
           <nav>
-            {/* <Link to='/'>Active Tasks</Link> */}
+            <h1>Bloc-it-off</h1>
+             <Link to='/'>Active Tasks</Link>
             <Link to='/TaskHistory'>Task History</Link>
           </nav>
           <main>
-            {/* <Route exact path="/" component={TaskList} /> */}
+             <Route exact path="/"  render={()=><TaskList firebase={firebase} />} />
             <Route path="/TaskHistory" component={TaskHistory} />
           </main>
-
       </div>
     );
   }
