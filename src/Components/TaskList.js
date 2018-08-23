@@ -60,17 +60,22 @@ class TaskList extends Component {
    this.setState({ newTaskPriority: parseInt(e.target.value) })
  }
 
- BoxChecked(e){
-  console.log("this was checked")
+
+
+ BoxChecked(index){
+   if (true){console.log("this was checked")
+   console.log(index)} else {console.log("uncomplete")}
 
  }
 
-  render() {
+
+
+render() {
     return(
       <div className="myTaskList"> {this.state.tasks.map((task, index) =>
         <ul key={index}>
           <li>{task.name}</li>
-          <li><input type="checkbox"  onChange={ (e) => this.BoxChecked(e) }  /></li>
+          <li><input type="checkbox" onChange={ () => this.BoxChecked(index) }  /></li>
           <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
           <li><Moment format='lll'>{this.state.sentAt}</Moment></li>
         </ul>
