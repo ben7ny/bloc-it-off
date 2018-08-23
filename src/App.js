@@ -29,7 +29,7 @@ class App extends Component {
             <Link to='/TaskHistory'>Task History</Link>
           </nav>
           <main>
-             <Route exact path="/"  render={()=><TaskList firebase={firebase} />} />
+            <Route exact path="/"  render={()=><TaskList firebase={firebase} />} />
             <Route path="/TaskHistory" component={TaskHistory} />
           </main>
       </div>

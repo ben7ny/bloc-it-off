@@ -15,12 +15,17 @@ class TaskList extends Component {
     this.tasksRef = this.props.firebase.database().ref('tasks');
   }
 
+
+
   componentDidMount(){
+
+    console.log("info is passed");
     this.tasksRef.on('child_added', snapshot => {
       const task = snapshot.val();
       task.key = snapshot.key;
       const tasks = this.state.tasks.concat( task ).sort((a, b) => a.priority > b.priority)
       this.setState({ tasks: tasks })
+      console.log(tasks);
     });
 
     this.tasksRef.on('child_removed', snapshot => {
@@ -30,6 +35,7 @@ class TaskList extends Component {
   }
 
 
+  
 
   createTask(e){
     e.preventDefault();
