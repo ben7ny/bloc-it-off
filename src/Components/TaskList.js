@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 
 class TaskList extends Component {
   constructor(props){
@@ -57,15 +60,19 @@ class TaskList extends Component {
    this.setState({ newTaskPriority: parseInt(e.target.value) })
  }
 
+ BoxChecked(e){
+  console.log("this was checked")
 
+ }
 
   render() {
     return(
       <div className="myTaskList"> {this.state.tasks.map((task, index) =>
         <ul key={index}>
           <li>{task.name}</li>
-          <li><input type="checkbox"  /></li>
+          <li><input type="checkbox"  onChange={ (e) => this.BoxChecked(e) }  /></li>
           <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
+          <li><Moment format='lll'>{this.state.sentAt}</Moment></li>
         </ul>
       )}
 
