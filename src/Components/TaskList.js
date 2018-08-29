@@ -30,7 +30,9 @@ class TaskList extends Component {
   }
 
 
-  componentWillUnmount() { this.tasksRef.off('child_added');}
+  componentWillUnmount() {
+    this.tasksRef.off('child_added');
+  }
 
 
   createTask(e){
