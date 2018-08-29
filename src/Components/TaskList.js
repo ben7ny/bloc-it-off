@@ -33,6 +33,7 @@ class TaskList extends Component {
       const delttask = this.state.tasks.filter( (task, i) => task.key !== snapshot.key);
       this.setState({ tasks: delttask })
     });
+
   }
 
 
@@ -41,13 +42,13 @@ class TaskList extends Component {
     e.preventDefault();
     const newTask = this.state.NewTaskDescription;
     const newTaskPriority = this.state.newTaskPriority;
-    const taskVisibility = this.state.visibility;
+    //const taskVisibility = this.state.visibility;
     console.log(newTask);
     this.tasksRef.push({
       name: newTask,
       priority: newTaskPriority,
       sendAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      visibility: taskVisibility
+      visibility: true
     });
 
   }
@@ -69,6 +70,9 @@ class TaskList extends Component {
 
 
   BoxChecked(index, task){
+    task.visibility = false;
+    console.log(index, task)
+    this.tasksRef.child(task.key).update(task)
     // console.log(index);
     // console.log(task);
 
@@ -77,12 +81,11 @@ class TaskList extends Component {
 
 
 
-    const makedTask = task.visibility === false;
-    const markedTasks = this.state.doneTasks;
-    const taskHistory = markedTasks.concat(task);
-    // this.setState({visibility: makedTask  })
-    this.setState({ doneTasks: taskHistory });
-    console.log(taskHistory);
+    //const markedTasks = this.state.doneTasks;
+    //const taskHistory = markedTasks.concat(task);
+    //this.setState({visibility: makedTask  })
+    // this.setState({ doneTasks: taskHistory });
+    // console.log(taskHistory);
 
 
   }
@@ -118,7 +121,7 @@ render() {
     return(
      // const myTaskList = this.state.visibility == true ? 'shown' : 'hidden'
       <div> {this.state.tasks.map((task, index) =>
-        <ul key={index}  className={this.state.visibility === true? 'shown' : 'hidden' }>
+        <ul key={index}  className={task.visibility ? 'shown' : 'hidden' }>
           <li>{task.name}</li>
           <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
           <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
