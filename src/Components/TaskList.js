@@ -11,7 +11,9 @@ class TaskList extends Component {
       tasks: [],
       NewTaskDescription: "",
       newTaskPriority: 1,
-      sendAt: ""
+      sendAt: "",
+      visibility: true,
+      doneTasks: []
     };
 
     this.tasksRef = this.props.firebase.database().ref('tasks');
@@ -23,6 +25,8 @@ class TaskList extends Component {
       task.key = snapshot.key;
       const tasks = this.state.tasks.concat( task ).sort((a, b) => a.priority > b.priority)
       this.setState({ tasks: tasks })
+      const doneTasks = this.state.doneTasks.concat( task ).sort((a, b) => a.priority > b.priority)
+      this.setState({ doneTasks: doneTasks })
     });
 
     this.tasksRef.on('child_removed', snapshot => {
@@ -37,44 +41,84 @@ class TaskList extends Component {
     e.preventDefault();
     const newTask = this.state.NewTaskDescription;
     const newTaskPriority = this.state.newTaskPriority;
+    const taskVisibility = this.state.visibility;
     console.log(newTask);
     this.tasksRef.push({
       name: newTask,
       priority: newTaskPriority,
-      sendAt: this.props.firebase.database.ServerValue.TIMESTAMP
+      sendAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      visibility: taskVisibility
     });
 
   }
 
   deleteTask(task){
-  this.tasksRef.child(task.key).remove();
- }
+    this.tasksRef.child(task.key).remove();
+  }
 
 
- getNewTaskUpdate(e) {
-  this.setState({ NewTaskDescription: e.target.value });
- }
+  getNewTaskUpdate(e) {
+    this.setState({ NewTaskDescription: e.target.value });
+  }
 
- getNewTaskPriorityUpdate(e) {
-   console.log('e', e)
-   this.setState({ newTaskPriority: parseInt(e.target.value) })
- }
+  getNewTaskPriorityUpdate(e) {
+    console.log('e', e)
+    this.setState({ newTaskPriority: parseInt(e.target.value) })
+  }
 
 
 
- BoxChecked(index, task){
-   if (true){
-    task ==  'hidden';
-   }
+  BoxChecked(index, task){
+    // console.log(index);
+    // console.log(task);
 
- }
+    // const pastTasks = this.state.pastTasks.concat( task )
+    // this.setState({ pastTasks: pastTasks })
+
+
+
+    const makedTask = task.visibility === false;
+    const markedTasks = this.state.doneTasks;
+    const taskHistory = markedTasks.concat(task);
+    // this.setState({visibility: makedTask  })
+    this.setState({ doneTasks: taskHistory });
+    console.log(taskHistory);
+
+
+  }
+
+
+  // getVisibility(index, task){
+  //   const oldTask = task.sendAt;
+  //   const timenow = new Date();
+  //   const toHour = timenow.getSeconds();
+  //
+  // }
+
+  // oldTasks(index, task){
+  //   const oldTask = task.sendAt;
+  //   const timeFormat = new Date();
+  //   const toSecond = timeFormat.getSeconds();
+  //   console.log(toSecond);
+  //   if (toSecond === 5){
+  //     const makedTask = task.visibility === false;
+  //     const taskHistory = this.state.doneTasks.concat(task);
+  //     this.setState({visibility: makedTask  })
+  //     // this.setState({ doneTasks: taskHistory });
+  //   }
+  //
+  //
+  //
+  // }
+
 
 
 
 render() {
     return(
-      <div className="myTaskList"> {this.state.tasks.map((task, index) =>
-        <ul key={index}>
+     // const myTaskList = this.state.visibility == true ? 'shown' : 'hidden'
+      <div> {this.state.tasks.map((task, index) =>
+        <ul key={index}  className={this.state.visibility === true? 'shown' : 'hidden' }>
           <li>{task.name}</li>
           <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
           <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
