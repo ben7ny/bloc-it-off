@@ -70,9 +70,14 @@ class TaskList extends Component {
 
 
   BoxChecked(index, task){
+    const doneTasks = this.state.doneTasks.push( task )
+    this.setState({ NewTaskDescription: doneTasks });
     task.visibility = false;
     console.log(index, task)
+    // this.tasksRef.child(task.key).remove();
     this.tasksRef.child(task.key).update(task)
+    console.log(task.key)
+      console.log(this.state.doneTasks)
     // console.log(index);
     // console.log(task);
 
