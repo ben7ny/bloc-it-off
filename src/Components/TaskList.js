@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
-
+import TaskHistory from './TaskHistory.js'
 
 class TaskList extends Component {
   constructor(props){
@@ -73,35 +73,22 @@ class TaskList extends Component {
     const doneTasks = this.state.doneTasks.push( task )
     this.setState({ NewTaskDescription: doneTasks });
     task.visibility = false;
+
     console.log(index, task)
+
     // this.tasksRef.child(task.key).remove();
+
     this.tasksRef.child(task.key).update(task)
+
     console.log(task.key)
-      console.log(this.state.doneTasks)
-    // console.log(index);
-    // console.log(task);
+    console.log(this.state.doneTasks)
 
-    // const pastTasks = this.state.pastTasks.concat( task )
-    // this.setState({ pastTasks: pastTasks })
-
-
-
-    //const markedTasks = this.state.doneTasks;
-    //const taskHistory = markedTasks.concat(task);
-    //this.setState({visibility: makedTask  })
-    // this.setState({ doneTasks: taskHistory });
-    // console.log(taskHistory);
 
 
   }
 
 
-  // getVisibility(index, task){
-  //   const oldTask = task.sendAt;
-  //   const timenow = new Date();
-  //   const toHour = timenow.getSeconds();
-  //
-  // }
+
 
   // oldTasks(index, task){
   //   const oldTask = task.sendAt;
@@ -125,32 +112,35 @@ class TaskList extends Component {
 render() {
     return(
      // const myTaskList = this.state.visibility == true ? 'shown' : 'hidden'
-      <div> {this.state.tasks.map((task, index) =>
-        <ul key={index}  className={task.visibility ? 'shown' : 'hidden' }>
-          <li>{task.name}</li>
-          <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
-          <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
-          <li><Moment format='lll'>{this.state.sentAt}</Moment></li>
-        </ul>
-      )}
-
       <div>
-        <form className="NewTaskCreated" onSubmit={ (e) =>this.createTask(e)}>
-          <label> Enter New Task:
-          <input type="text" placeholder="Type Your Task" value={this.state.NewTaskDescription} onChange={ (e) => this.getNewTaskUpdate(e) }/>
-          </label>
+         <div> {this.state.tasks.map((task, index) =>
+            <ul key={index}  className={task.visibility ? 'shown' : 'hidden' }>
+              <li>{task.name}</li>
+              <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
+              <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
+              <li><Moment format='lll'>{this.state.sentAt}</Moment></li>
+            </ul>
+          )}
 
-          <label>Priority
-            <select onChange={ (e) => this.getNewTaskPriorityUpdate(e) }>
-              <option value="1">High</option>
-              <option value="2">Medium</option>
-              <option value="3">Low</option>
-            </select>
-          </label>
-          <input type="submit" value="Create Task" />
+          <div>
+            <form className="NewTaskCreated" onSubmit={ (e) =>this.createTask(e)}>
+              <label> Enter New Task:
+              <input type="text" placeholder="Type Your Task" value={this.state.NewTaskDescription} onChange={ (e) => this.getNewTaskUpdate(e) }/>
+              </label>
 
-        </form>
-       </div>
+              <label>Priority
+                <select onChange={ (e) => this.getNewTaskPriorityUpdate(e) }>
+                  <option value="1">High</option>
+                  <option value="2">Medium</option>
+                  <option value="3">Low</option>
+                </select>
+              </label>
+              <input type="submit" value="Create Task" />
+
+            </form>
+           </div>
+          </div>
+          <TaskHistory />
       </div>
     );
   }
