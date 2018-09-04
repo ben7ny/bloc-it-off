@@ -88,22 +88,20 @@ class TaskList extends Component {
     // console.log(date)
 
 
+    const currentTime = new Date().getTime()
+    const one_week_in_miliseconds = 3 * 1000; /* ms */
+    const blocitoffTime = task.sendAt;
+    console.log("bloc off", blocitoffTime);
+    console.log("time now", currentTime);
   }
 
 
 
 
   // oldTasks(index, task){
-  //   const oldTask = task.sendAt;
-  //   const timeFormat = new Date();
-  //   const toSecond = timeFormat.getSeconds();
-  //   console.log(toSecond);
-  //   if (toSecond === 5){
-  //     const makedTask = task.visibility === false;
-  //     const taskHistory = this.state.doneTasks.concat(task);
-  //     this.setState({visibility: makedTask  })
-  //     // this.setState({ doneTasks: taskHistory });
-  //   }
+  //   const time_since_epoch = new Date().getTime()
+  //   const one_week_in_miliseconds = 7 * 24 * 60 * 60 * 1000; /* ms */
+  //   console.log(one_week_in_miliseconds);
   //
   //
   //
