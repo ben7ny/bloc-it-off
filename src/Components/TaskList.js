@@ -80,9 +80,11 @@ class TaskList extends Component {
 
     this.tasksRef.child(task.key).update(task)
 
-    console.log(task.key)
-    console.log(this.state.doneTasks)
+    // console.log(task.key)
+    // console.log(this.state.doneTasks)
 
+    // const datetim = moment().add(7, 'd');
+    // console.log(date)
 
 
   }
@@ -118,7 +120,7 @@ render() {
               <li>{task.name}</li>
               <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
               <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
-              <li><Moment format='lll'>{this.state.sentAt}</Moment></li>
+              <li><Moment format='lll'>{task.sendAt}</Moment></li>
             </ul>
           )}
 
