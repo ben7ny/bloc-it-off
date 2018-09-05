@@ -7,37 +7,16 @@ class TaskList extends Component {
     super(props);
 
     this.state = {
-      tasks: [],
       NewTaskDescription: "",
       newTaskPriority: 1,
       sendAt: "",
-      visibility: true,
+      visibility: true      ,
       doneTasks: []
     };
 
-    this.tasksRef = this.props.firebase.database().ref('tasks');
   }
 
-  componentDidMount(){
-    this.tasksRef.on('child_added', snapshot => {
-      const task = snapshot.val();
-      task.key = snapshot.key;
-      const tasks = this.state.tasks.concat( task ).sort((a, b) => a.priority > b.priority)
-      this.setState({ tasks: tasks })
-      const doneTasks = this.state.doneTasks.concat( task ).sort((a, b) => a.priority > b.priority)
-      this.setState({ doneTasks: doneTasks })
-    });
 
-    this.tasksRef.on('child_removed', snapshot => {
-      const delttask = this.state.tasks.filter( (task, i) => task.key !== snapshot.key);
-      this.setState({ tasks: delttask })
-    });
-
-  }
-
-  componentWillUnmount() {
-    this.tasksRef.off('child_added');
-  }
 
   createTask(e){
     e.preventDefault();
@@ -45,7 +24,7 @@ class TaskList extends Component {
     const newTaskPriority = this.state.newTaskPriority;
     //const taskVisibility = this.state.visibility;
     console.log(newTask);
-    this.tasksRef.push({
+    this.props.tasksRef.push({
       name: newTask,
       priority: newTaskPriority,
       sendAt: this.props.firebase.database.ServerValue.TIMESTAMP,
@@ -54,9 +33,7 @@ class TaskList extends Component {
 
   }
 
-  deleteTask(task){
-    this.tasksRef.child(task.key).remove();
-  }
+
 
 
   getNewTaskUpdate(e) {
@@ -68,42 +45,13 @@ class TaskList extends Component {
     this.setState({ newTaskPriority: parseInt(e.target.value) })
   }
 
-
-
-  BoxChecked(index, task){
-    const doneTasks = this.state.doneTasks.push( task )
-    this.setState({ NewTaskDescription: doneTasks });
-    task.visibility = false;
-
-    console.log(index, task)
-
-    // this.tasksRef.child(task.key).remove();
-
-    this.tasksRef.child(task.key).update(task)
-
-    // console.log(task.key)
-    // console.log(this.state.doneTasks)
-
-    // const datetim = moment().add(7, 'd');
-    // console.log(date)
-
-
-    const currentTime = new Date().getTime()
-    const one_week_in_miliseconds = 3 * 1000; /* ms */
-    const blocitoffTime = task.sendAt;
-    console.log("bloc off", blocitoffTime);
-    console.log("time now", currentTime);
-  }
-
-
-
-
   // oldTasks(index, task){
   //   const time_since_epoch = new Date().getTime()
   //   const one_week_in_miliseconds = 7 * 24 * 60 * 60 * 1000; /* ms */
   //   console.log(one_week_in_miliseconds);
   //
-  //
+  //   const datetim = moment().add(7, 'd');
+  //   console.log(date)
   //
   // }
 
@@ -114,11 +62,11 @@ render() {
     return(
      // const myTaskList = this.state.visibility == true ? 'shown' : 'hidden'
       <div>
-         <div> {this.state.tasks.map((task, index) =>
-            <ul key={index}  className={task.visibility ? 'shown' : 'hidden' }>
+         <div> {this.props.tasks.map((task, index) =>
+            <ul key={index}  className={!task.expired && task.visibility ? 'shown' : 'hidden' }>
               <li>{task.name}</li>
-              <li><input type="checkbox" onChange={ () => this.BoxChecked(index, task) }  /></li>
-              <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
+              <li><input type="checkbox" onChange={ () => this.props.boxChecked(index, task, false) }  /></li>
+              <li><button onClick={(e)=>this.props.deleteTask(task)}>Remove Task</button></li>
               <li><Moment format='lll'>{task.sendAt}</Moment></li>
             </ul>
           )}
