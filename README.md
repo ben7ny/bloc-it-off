@@ -1,7 +1,6 @@
 # Task Devil
 
-Task Devil is a To-do App that allows users to create and delete tasks. The user can tick-off tasks and visit the completed tasks in the Task History tab. The user has the option to tick-off completed tasks in the Task History to make them active again. Task devil deletes uncompleted task after seven days. This application is made with React.js and Google firebase.
-
+Task Devil app is a To-do list that allows users to create and delete tasks. The user can tick-off tasks and visit the completed tasks in the Task History tab. The user has the option to tick-off completed tasks in the Task History to make them active again. Task devil deletes uncompleted task after seven days. Task Devil's Users can prioritize their tasks based on high, medium and low, so the tasks with higher priority stay on the top of the list. 
 
 
 ## Deployment
