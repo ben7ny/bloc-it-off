@@ -22,7 +22,6 @@ class TaskList extends Component {
     e.preventDefault();
     const newTask = this.state.NewTaskDescription;
     const newTaskPriority = this.state.newTaskPriority;
-    //const taskVisibility = this.state.visibility;
     console.log(newTask);
     this.props.tasksRef.push({
       name: newTask,
@@ -45,22 +44,12 @@ class TaskList extends Component {
     this.setState({ newTaskPriority: parseInt(e.target.value) })
   }
 
-  // oldTasks(index, task){
-  //   const time_since_epoch = new Date().getTime()
-  //   const one_week_in_miliseconds = 7 * 24 * 60 * 60 * 1000; /* ms */
-  //   console.log(one_week_in_miliseconds);
-  //
-  //   const datetim = moment().add(7, 'd');
-  //   console.log(date)
-  //
-  // }
 
 
 
 
 render() {
     return(
-     // const myTaskList = this.state.visibility == true ? 'shown' : 'hidden'
       <div>
          <div> {this.props.tasks.map((task, index) =>
             <ul key={index}  className={!task.expired && task.visibility ? 'shown' : 'hidden' }>

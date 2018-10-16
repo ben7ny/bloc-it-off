@@ -69,12 +69,9 @@ class App extends Component {
 
     console.log(index, task)
 
-    // this.tasksRef.child(task.key).remove();
 
     this.tasksRef.child(task.key).update(task)
 
-    // console.log(task.key)
-    // console.log(this.state.doneTasks)
 
 
 
@@ -82,18 +79,18 @@ class App extends Component {
     const currentTime = new Date().getTime()
     const one_week_in_miliseconds = 3 * 1000; /* ms */
     const blocitoffTime = task.sendAt;
-    // const blocReadableTime = blocitoffTime.getTime()
 
     console.log("bloc off", blocitoffTime);
     console.log("time now", currentTime);
-    // console.log("bloc readable time", blocReadableTime);
   }
+
+
 
   render() {
     return (
       <div className="App">
           <nav>
-            <h1>Bloc-it-off</h1>
+            <h1>Task Devil</h1>
              <Link to='/'>Active Tasks</Link>
             <Link to='/TaskHistory'>Task History</Link>
           </nav>
