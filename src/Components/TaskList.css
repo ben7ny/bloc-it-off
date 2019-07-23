@@ -1,0 +1,136 @@
+.NewTaskCreated {
+  width: 97%;
+  margin-left: 16px;
+  margin-top: 30px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  align-items: end;
+}
+
+.addTaskboxNtitle label input {
+  min-width: 100%;
+}
+
+.addTaskboxNtitle p {
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.addPriorityboxNtitle p {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: white;
+}
+
+.timeNtaskboxes li {
+  list-style-type: none;
+}
+
+.timeNtaskboxes {
+  display: grid;
+  grid-template-rows: 60px auto;
+  padding-bottom: 12px;
+}
+
+.taskNboxes {
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  align-items: center;
+}
+
+.addNewTaskBox input {
+  width: 65vw;
+
+  height: 40px;
+  box-sizing: border-box;
+  border: 2px solid #fd9a00;
+  background-color: black;
+  font-size: 1.2rem;
+  border-radius: 6px;
+}
+
+select {
+  height: 40px;
+  width: 100px;
+  color: #fd9a00;
+
+  border: 2px solid #fd9a00;
+  background-color: black;
+}
+
+.addButton input {
+  height: 40px;
+  width: 92%;
+  color: white;
+
+  background-color: #4869b0;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.TaskParts {
+  margin: 0 auto;
+  width: 94%;
+}
+
+.TaskParts ul {
+  color: white;
+  border-bottom: 2px solid #fd9a00;
+}
+
+.TaskParts ul:last-child {
+  border-bottom: 0;
+}
+
+.taskNboxes li input {
+  height: 24px;
+  width: 24px;
+  border: solid 2px red;
+}
+
+.taskNboxes li span {
+  font-weight: 600;
+  color: #4869b0;
+}
+
+.taskNboxes li button {
+  width: 100px;
+  height: 40px;
+  background-color: black;
+  border: 2px solid #fd2700;
+  border-radius: 6px;
+  color: #fd2700;
+}
+
+.taskNboxes li {
+  padding-bottom: 18px;
+}
+
+.taskNboxes li:nth-child(3) {
+  justify-self: end;
+}
+
+.taskNboxes li span {
+  vertical-align: middle;
+}
+
+.taskNboxes li input {
+  vertical-align: middle;
+}
+@media (max-width: 767.98px) {
+  .NewTaskCreated {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: end;
+  }
+
+  .addNewTaskBox input {
+    width: 89vw;
+  }
+
+  select {
+    width: 89vw;
+  }
+}

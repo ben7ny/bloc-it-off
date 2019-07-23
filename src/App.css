@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -25,8 +25,75 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
 
 .hidden {
   display: none;
+}
+
+/* nav.navbar.navbar-expand-md a {
+  color: blue;
+}
+
+nav.navbar.navbar-expand-md a.nav-link:hover {
+  color: green;
+}
+
+nav.navbar.navbar-expand-md a.nav-link:focus {
+  color: green;
+} */
+
+/* nav.navbar.navbar-expand-md button.navbar-toggler {
+  color: red;
+  border: solid 1px orange;
+} */
+
+/* .navbar {
+  width: 100vw;
+} */
+
+.navbar-nav > li > a {
+  color: #4869b0;
+  text-decoration: none;
+  text-decoration: none;
+}
+
+.navbar-nav > li > a:hover {
+  color: white;
+  text-decoration: none;
+  border-bottom: dashed 2px white;
+}
+
+.navbar-nav > li > a:focus {
+  color: white;
+  text-decoration: none;
+  border-bottom: solid 2px white;
+}
+
+/* .navbar-nav > li:hover {
+  border-bottom: solid 2px red;
+}
+
+.navbar-nav > li:focus {
+  border-bottom: solid 2px red;
+}
+
+.navbar-nav > li:active {
+  border-bottom: solid 2px red;
+} */
+
+@media (max-width: 767.98px) {
+  /* nav {
+    margin-right: -24px;
+  } */
+
+  /* .navbar-nav > li > a:hover {
+    color: green;
+    text-decoration: none;
+  }
+
+  .navbar-nav > li > a:focus {
+    color: red;
+    text-decoration: none;
+  } */
 }

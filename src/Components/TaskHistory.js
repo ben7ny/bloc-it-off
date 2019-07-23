@@ -1,22 +1,37 @@
-import React, { Component } from 'react';
-import Moment from 'react-moment';
-
+import React, { Component } from "react";
+import Moment from "react-moment";
+import "./TaskHistory.css";
 class TaskHistory extends Component {
   render() {
-    return(
-      <div>
-         {this.props.tasks.map((task, index) =>
-            <ul key={index}  className={!task.expired && task.visibility ? 'hidden' : 'shown' }>
+    return (
+      <div className="histoyPage">
+        {this.props.tasks.map((task, index) => (
+          <ul
+            key={index}
+            className={!task.expired && task.visibility ? "hidden" : "shown"}
+          >
+            {" "}
+            <div className="taskHistoryTimeNboxes">
+              <div className="taskHistoryBoxes">
+                <li>
+                  <Moment format="lll">{task.sendAt}</Moment>
+                </li>
+                <li className={task.expired ? "hidden" : "shown"}>
+                  <input
+                    type="radio"
+                    checked={task.visibility}
+                    onChange={() => this.props.boxChecked(index, task, true)}
+                  />
+                  <span>Send Back to Active Tasks</span>
+                </li>
+              </div>
               <li>{task.name}</li>
-              <li className={task.expired ? 'hidden' : 'shown' }><input type="checkbox" checked={task.visibility} onChange={ () => this.props.boxChecked(index, task, true) }  /></li>
-              <li><button onClick={(e)=>this.deleteTask(task)}>Remove Task</button></li>
-              <li><Moment format='lll'>{task.sendAt}</Moment></li>
-            </ul>
-          )}
+            </div>
+          </ul>
+        ))}
       </div>
     );
   }
 }
-
 
 export default TaskHistory;
