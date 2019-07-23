@@ -70,6 +70,12 @@ nav.navbar.navbar-expand-md a.nav-link:focus {
   border-bottom: solid 2px white;
 }
 
+.navbar-nav > li > a:active {
+  color: white;
+  text-decoration: none;
+  border-bottom: solid 2px white;
+}
+
 /* .navbar-nav > li:hover {
   border-bottom: solid 2px red;
 }
