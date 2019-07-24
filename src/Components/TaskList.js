@@ -93,11 +93,11 @@ class TaskList extends Component {
                     </Moment>
                   </li>
                   <li>
+                    <span>Check</span>
                     <input
                       type="radio"
                       onChange={() => this.props.boxChecked(index, task, false)}
                     />
-                    <span>Check</span>
                   </li>
 
                   <li>

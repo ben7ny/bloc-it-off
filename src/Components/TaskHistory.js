@@ -17,12 +17,12 @@ class TaskHistory extends Component {
                   <Moment format="lll">{task.sendAt}</Moment>
                 </li>
                 <li className={task.expired ? "hidden" : "shown"}>
+                  <span>Send Back to Active Tasks</span>
                   <input
                     type="radio"
                     checked={task.visibility}
                     onChange={() => this.props.boxChecked(index, task, true)}
                   />
-                  <span>Send Back to Active Tasks</span>
                 </li>
               </div>
               <li>{task.name}</li>
